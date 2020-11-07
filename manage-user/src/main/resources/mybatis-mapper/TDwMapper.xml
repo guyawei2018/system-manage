@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanswon.ssm.dao.TDwMapper">
+  <resultMap id="BaseResultMap" type="com.lanswon.ssm.domain.entity.TDw">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="JGXH" jdbcType="INTEGER" property="jgxh" />
+    <result column="SJJJXH" jdbcType="INTEGER" property="sjjjxh" />
+    <result column="JGBM" jdbcType="VARCHAR" property="jgbm" />
+    <result column="YJGDM" jdbcType="VARCHAR" property="yjgdm" />
+    <result column="SJJGBM" jdbcType="VARCHAR" property="sjjgbm" />
+    <result column="BMMC" jdbcType="VARCHAR" property="bmmc" />
+    <result column="DPTMC" jdbcType="VARCHAR" property="dptmc" />
+    <result column="JGQC" jdbcType="VARCHAR" property="jgqc" />
+    <result column="JGJC" jdbcType="VARCHAR" property="jgjc" />
+    <result column="JGLX" jdbcType="INTEGER" property="jglx" />
+    <result column="QYRQ" jdbcType="TIMESTAMP" property="qyrq" />
+    <result column="GXRQ" jdbcType="TIMESTAMP" property="gxrq" />
+    <result column="JGZT" jdbcType="INTEGER" property="jgzt" />
+    <result column="PX" jdbcType="VARCHAR" property="px" />
+    <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj" />
+    <result column="GXSJ" jdbcType="TIMESTAMP" property="gxsj" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,89 @@
+spring:
+  boot:
+    admin:
+      client:
+        url: http://127.0.0.1:18002
+        instance:
+          prefer-ip: true
+          service-base-url: http://192.168.3.131:${server.port}
+          name: 巡特-认证鉴权服务
+  # *****************************链路调用*****************************
+#  zipkin:
+#    base-url: http://192.168.44.78:9411
+#    sender:
+#      type: web
+#  sleuth:
+#    sampler:
+#      # 采样100%
+#      probability: 1.0
+  # ******************************数据源******************************
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://61.160.81.178:13391/swat_sys_manage?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
+      username: root
+      password: Password1
+      max-active: 10
+      initial-size: 5
+      min-idle: 2
+      max-wait: 60000
+      pool-prepared-statements: true
+      web-stat-filter:
+        enabled: true
+        url-pattern: /druid
+  # ******************************redis******************************
+  redis:
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 8
+        min-idle: 0
+        max-wait: 0
+    port: 13395
+    host: 61.160.81.178
+    database: 2
+  # *****************************服务注册*****************************
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 61.160.81.178:13393
+        # 多网卡指定客户端IP
+        #ip: 192.168.100.109
+#    stream:
+#      rocketmq:
+#        binder:
+#          name-server: 50.65.81.59:9876
+#      bindings:
+#        output:
+#          destination: topic-log
+    sentinel:
+      transport:
+        dashboard: 61.160.81.178:13394
+        heartbeat-interval-ms: 5000
+        client-ip: 192.168.3.131
+        port: 8721
+      eager: true
+# *****************************安全配置*****************************
+lanswon:
+  security:
+    code:
+      image:
+        length: 4
+        width: 60
+        height: 38
+    oauth2:
+      tokenStore: jwt
+      clients:
+        - clientId: lianzhi
+          clientSecret: 123456
+          accessTokenValiditySeconds: 604800
+          refTokenValiditySeconds: 604800 #86400
+        - clientId: lanswon
+          clientSecret: 123456
+          accessTokenValiditySeconds: 604800
+          refTokenValiditySeconds: 604800 #86400
+rocketmq:
+  name-server: 50.65.81.59:9876
+  producer:
+    group: log

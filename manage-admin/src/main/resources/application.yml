@@ -1,0 +1,24 @@
+server:
+  port: 18002
+spring:
+  boot:
+    admin:
+      ui:
+        title: "服务监控平台"
+        brand: "<img ser='assets/img/icon-spring-boot-admin.svg'><span>蓝深</span>"
+  application:
+    name: boot-admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+logging:
+  level:
+    com.lanswon.*: debug
+    com.alibaba.nacos.*: error
+  path: /log/spring-alibab/admin

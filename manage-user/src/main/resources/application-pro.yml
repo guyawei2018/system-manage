@@ -1,0 +1,75 @@
+spring:
+  boot:
+    admin:
+      client:
+        url: http://50.64.102.34:18002
+        instance:
+          prefer-ip: true
+          service-base-url: http://50.64.102.38:${server.port}
+          name: 巡特-系统管理服务
+  application:
+    name: USR-MANAGEMENT
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 50.64.102.34:8848
+        ip: 50.64.102.38
+    stream:
+      rocketmq:
+        binder:
+          name-server: 50.64.102.34:9876;50.64.102.38:9876
+        bindings:
+          output:
+            producer:
+              vipChannelEnabled: false
+      bindings:
+        output:
+          destination: topic-log
+    sentinel:
+      transport:
+        dashboard: 50.64.102.34:18003
+        heartbeat-interval-ms: 5000
+        client-ip: 50.64.102.38
+        port: 8720
+      log:
+        dir: /log/spring-alibaba/ssm/csp
+      eager: true
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://50.64.102.35:3306/swat_sys_manage?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
+      username: root
+      password: Password1
+      max-active: 10
+      initial-size: 5
+      min-idle: 2
+      max-wait: 60000
+      pool-prepared-statements: true
+      web-stat-filter:
+        enabled: true
+        url-pattern: /druid
+      test-while-idle: true
+      validation-query: SELECT 1 FROM DUAL
+      keep-alive: true
+  redis:
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 8
+        min-idle: 0
+        max-wait: 0
+    port: 6379
+    host: 50.64.102.35
+    database: 2
+
+fdfs:
+  so-timeout: 1501
+  connect-timeout: 601
+  thumb-image:
+    width: 150
+    height: 200
+  tracker-list:
+    - 50.64.102.38:22122
+
+admin: 13861786111

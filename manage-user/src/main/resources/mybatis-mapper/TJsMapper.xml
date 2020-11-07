@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanswon.ssm.dao.TJsMapper">
+  <resultMap id="BaseResultMap" type="com.lanswon.ssm.domain.entity.TJs">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="JSBH" jdbcType="INTEGER" property="jsbh" />
+    <result column="JSMC" jdbcType="VARCHAR" property="jsmc" />
+    <result column="JSDM" jdbcType="VARCHAR" property="jsdm" />
+    <result column="JSMS" jdbcType="VARCHAR" property="jsms" />
+    <result column="JSZT" jdbcType="CHAR" property="jszt" />
+    <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj" />
+    <result column="CJR" jdbcType="VARCHAR" property="cjr" />
+    <result column="CJDZ" jdbcType="VARCHAR" property="cjdz" />
+    <result column="GXSJ" jdbcType="TIMESTAMP" property="gxsj" />
+    <result column="GXR" jdbcType="VARCHAR" property="gxr" />
+    <result column="GXDZ" jdbcType="VARCHAR" property="gxdz" />
+    <result column="JSLX" jdbcType="CHAR" property="jslx" />
+    <result column="GZFS" jdbcType="CHAR" property="gzfs" />
+    <result column="CJLX" jdbcType="VARCHAR" property="cjlx" />
+  </resultMap>
+
+  <sql id="column_List">
+     R.JSBH AS jsbh,
+     R.JSMC AS jsmc,
+     R.JSDM AS jsdm,
+     R.JSMS AS jsms,
+     R.JSZT AS jszt,
+     R.CJSJ AS cjsj,
+     R.CJR  AS cjr,
+     R.CJDZ AS cjdz,
+     R.GXSJ AS gxsj,
+     R.GXR  AS gxr,
+     R.GXDZ AS gxdz,
+     R.JSLX AS jslx,
+     R.GZFS AS gzfs,
+     R.CJLX AS cjlx
+  </sql>
+
+  <select id="queryAllRoles" parameterType="com.lanswon.ssm.domain.dto.RoleQueryDto" resultMap="BaseResultMap">
+    SELECT
+    <include refid="column_List"/>
+    FROM t_js AS R
+    <where>
+      <if test=" roleName != null and roleName !='' ">
+        AND R.JSMC Like CONCAT('%',#{roleName,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    ORDER BY R.CJSJ desc
+    <if test="isPagination == 1">
+      LIMIT #{startLine,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="count" parameterType="com.lanswon.ssm.domain.dto.RoleQueryDto" resultType="int">
+    SELECT
+    count(*)
+    FROM t_js AS R
+    <where>
+      <if test=" roleName != null and roleName !='' ">
+        AND R.JSMC Like CONCAT('%',#{roleName,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+</mapper>

@@ -1,0 +1,69 @@
+# *****************************服务端口*****************************
+server:
+  port: 18810
+# ****************************系统日志****************************
+logging:
+  level:
+    com.lanswon.*: debug
+    org.springframework.security.*: info
+    io.lettuce.core.protocol.*: error
+    com.alibaba.nacos.*: error
+  path: /log/spring-alibaba/auth-server
+# ****************************开启feign日志级别及配置****************************
+feign:
+  sentinel:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 3000
+      #微服务实例
+      swat-sysmanage:
+        loggerLevel: full
+  httpclient:
+    max-connections: 200
+    max-connections-per-route: 50
+    #让feign 使用apache httpclient 做请求；而不是默认url
+    enabled: true
+    #开启请求压缩
+    compression:
+      request:
+        enabled: true
+      response:
+        enabled: true
+ribbon:
+  eager-load:
+    enabled: true
+    clients:
+      - swat-sysmanage
+# *****************************开启所有请求端点*****************************
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
+
+# ****************************mybatis映射****************************
+mybatis:
+  mapper-locations: classpath:/mybatis-mapper/*.xml
+
+spring:
+  application:
+    name: swat-oauthmanage
+  mvc:
+    servlet:
+      load-on-startup: 0
+    view:
+      prefix: /
+      suffix: .html
+    resources:
+      static-locations: classpath:/static/
+  profiles:
+    active: dev
+

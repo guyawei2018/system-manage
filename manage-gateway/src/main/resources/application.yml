@@ -1,0 +1,71 @@
+server:
+  port: 18801
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
+
+logging:
+  level:
+#    reactor.netty: info
+#    org.springframework.http.server.reactive: info
+#    org.springframework.web.reactive: info
+#    org.springframework.boot.autoconfigure.web: info
+    com.lanswon.*: debug
+    com.alibaba.nacos.*: error
+    org.springframework.cloud.gateway.*: info
+  path: /log/spring-alibaba/com.lanswon.gateway
+
+ribbon:
+  eager-load:
+    enabled: false
+
+spring:
+  application:
+    name: swat-gateway
+  cloud:
+    gateway:
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: "*"
+#            allowedMethods: "*"
+#            allowedHeaders: "*"
+      loadbalancer:
+        use404: true
+      #      httpclient:
+      #        pool:
+      #          type:
+      #        connect-timeout: 30000
+      #        response-timeout: 3
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+      routes:
+        - id: swat-sysmanage
+          uri: lb://swat-sysmanage
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix= 1
+        - id: swat-oauthmanage
+          uri: lb://swat-oauthmanage
+          predicates:
+            - Path=/oauth/**
+          filters:
+            - StripPrefix= 1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 3
+                redis-rate-limiter.burstCapacity: 100
+                key-resolver: "#{@pathKeyResolver}"
+  profiles:
+    active: dev

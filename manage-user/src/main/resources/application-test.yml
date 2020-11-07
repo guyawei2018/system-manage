@@ -1,0 +1,69 @@
+spring:
+  boot:
+    admin:
+      client:
+        url: http://192.168.89.71:18002
+        instance:
+          prefer-ip: true
+          service-base-url: http://192.168.89.71:${server.port}
+          name: 巡特-系统管理服务
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.89.71:8848
+        ip: 192.168.89.71
+    stream:
+      rocketmq:
+        binder:
+          name-server: 50.65.81.228:9876
+      bindings:
+        output:
+          destination: topic-log1
+    sentinel:
+      transport:
+        dashboard: 192.168.89.71:18003
+        heartbeat-interval-ms: 5000
+        client-ip: 192.168.89.71
+        port: 8720
+      log:
+        dir: /log/spring-alibaba/ssm/csp
+      eager: true
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.89.70:3306/swat_sys_manage?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
+      username: root
+      password: Password1
+      max-active: 10
+      initial-size: 5
+      min-idle: 2
+      max-wait: 60000
+      pool-prepared-statements: true
+      web-stat-filter:
+        enabled: true
+        url-pattern: /druid
+      test-while-idle: true
+      validation-query: SELECT 1 FROM DUAL
+      keep-alive: true
+  redis:
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 8
+        min-idle: 0
+        max-wait: 0
+    port: 6379
+    host: 192.168.89.70
+    database: 2
+
+fdfs:
+  so-timeout: 1501
+  connect-timeout: 601
+  thumb-image:
+    width: 150
+    height: 200
+  tracker-list:
+    - 50.64.110.144:22122
+
+admin: 15189757590

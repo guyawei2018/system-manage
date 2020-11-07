@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanswon.authserver.dao.TYhzpMapper">
+  <resultMap id="BaseResultMap" type="com.lanswon.authserver.domain.entity.TYhzp">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="SFZHM" jdbcType="VARCHAR" property="sfzhm" />
+    <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj" />
+    <result column="GXSJ" jdbcType="TIMESTAMP" property="gxsj" />
+    <result column="YHZP" jdbcType="LONGVARCHAR" property="yhzp" />
+  </resultMap>
+</mapper>

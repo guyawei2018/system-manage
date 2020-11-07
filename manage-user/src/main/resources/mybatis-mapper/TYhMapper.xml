@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanswon.ssm.dao.TYhMapper">
+  <resultMap id="BaseResultMap" type="com.lanswon.ssm.domain.entity.TYh">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="YHBH" jdbcType="INTEGER" property="yhbh" />
+    <result column="YHMC" jdbcType="VARCHAR" property="yhmc" />
+    <result column="YHMM" jdbcType="VARCHAR" property="yhmm" />
+    <result column="YHXB" jdbcType="CHAR" property="yhxb" />
+    <result column="SFZHM" jdbcType="VARCHAR" property="sfzhm" />
+    <result column="SJHM" jdbcType="VARCHAR" property="sjhm" />
+    <result column="YHZW" jdbcType="VARCHAR" property="yhzw" />
+    <result column="YHZT" jdbcType="CHAR" property="yhzt" />
+    <result column="RYGW" jdbcType="VARCHAR" property="rygw" />
+    <result column="YHNC" jdbcType="VARCHAR" property="yhnc" />
+    <result column="DWBM" jdbcType="VARCHAR" property="dwbm" />
+    <result column="ZHDLSJ" jdbcType="TIMESTAMP" property="zhdlsj" />
+    <result column="ZHZT" jdbcType="CHAR" property="zhzt" />
+    <result column="RLBH" jdbcType="VARCHAR" property="rlbh" />
+    <result column="SJZZBM" jdbcType="VARCHAR" property="sjzzbm" />
+    <result column="JH" jdbcType="VARCHAR" property="jh" />
+    <result column="BYSJHM1" jdbcType="VARCHAR" property="bysjhm1" />
+    <result column="SJBM" jdbcType="VARCHAR" property="sjbm" />
+    <result column="SJDJ" jdbcType="VARCHAR" property="sjdj" />
+    <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj" />
+    <result column="SJLY" jdbcType="CHAR" property="sjly" />
+  </resultMap>
+
+  <sql id="column_List">
+    U.YHBH AS yhbh,
+    U.YHMC AS yhmc,
+    U.YHMM AS yhmm,
+    U.YHXB AS yhxb,
+    U.SFZHM AS sfzhm,
+    U.SJHM AS sjhm,
+    U.YHZW AS yhzw,
+    U.YHZT AS yhzt,
+    U.RYGW AS rygw,
+    U.YHNC AS yhnc,
+    U.DWBM AS dwbm,
+    U.ZHDLSJ AS zhdlsj,
+    U.ZHZT AS zhzt,
+    U.RLBH AS rlbh,
+    U.SJZZBM AS sjzzbm,
+    U.JH AS jh,
+    U.BYSJHM1 AS bysjhm1,
+    U.SJBM AS sjbm,
+    U.SJDJ AS SJDJ,
+    U.CJSJ AS cjsj,
+    U.SJLY AS sjly
+  </sql>
+
+  <select id="queryAllUsers" parameterType="com.lanswon.ssm.domain.dto.UserQueryDto"
+          resultType="com.lanswon.ssm.domain.vo.UserVo">
+    SELECT
+    d.JGQC AS orgName,
+    <include refid="column_List"/>
+    FROM t_yh AS U
+    LEFT JOIN t_dw AS d
+    ON d.JGBM = U.DWBM
+    <where>
+      <if test=" status != null and status !='' ">
+        AND  U.YHZT =#{status,jdbcType=VARCHAR}
+      </if>
+      <if test="param !=null and param !=''">
+        and (
+      </if>
+      <if test=" param != null and param !='' ">
+        U.SJHM  Like CONCAT('%',#{param,jdbcType=VARCHAR},'%')
+      </if>
+      <if test=" param != null and param !='' ">
+        OR U.JH Like CONCAT('%',#{param,jdbcType=VARCHAR},'%')
+      </if>
+      <if test=" param != null and param !='' ">
+        OR U.YHMC Like CONCAT('%',#{param,jdbcType=VARCHAR},'%')
+      </if>
+      <if test=" param != null and param !='' ">
+        OR U.SFZHM Like CONCAT('%',#{param,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="param !=null and param !=''">
+        )
+      </if>
+    </where>
+    <if test="isPagination == 1">
+      LIMIT #{startLine,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="count" parameterType="com.lanswon.ssm.domain.dto.UserQueryDto" resultType="int">
+    SELECT COUNT(*)
+    FROM t_yh AS U
+    LEFT JOIN t_dw AS d
+    ON d.JGBM = U.DWBM
+    <where>
+      <if test=" status != null and status !='' ">
+        AND  U.YHZT =#{status,jdbcType=VARCHAR}
+      </if>
+      <if test="param !=null and param !=''">
+        AND (
+      </if>
+      <if test=" param != null and param !='' ">
+        U.SJHM  Like CONCAT('%',#{param,jdbcType=VARCHAR},'%')
+      </if>
+      <if test=" param != null and param !='' ">
+        OR U.JH Like CONCAT('%',#{param,jdbcType=VARCHAR},'%')
+      </if>
+      <if test=" param != null and param !='' ">
+        OR U.YHMC Like CONCAT('%',#{param,jdbcType=VARCHAR},'%')
+      </if>
+      <if test=" param != null and param !='' ">
+        OR U.SFZHM Like CONCAT('%',#{param,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="param !=null and param !=''">
+        )
+      </if>
+    </where>
+  </select>
+
+  <select id="queryUserInfo" parameterType="string" resultType="com.lanswon.ssm.vo.UserInfo">
+    SELECT
+      y.YHBH AS yhbh,
+      y.YHMC AS yhmc,
+      y.YHMM AS yhmm,
+      y.JH AS jh,
+      y.YHZT AS yhzt,
+      y.SFZHM AS sfzhm,
+      y.SJHM AS sjhm,
+      y.DWBM AS dwbm,
+      d.JGQC AS jgqc,
+      y.SJDJ AS sjdj,
+      z.LJ as zplj
+    FROM
+        t_yh AS y
+    LEFT JOIN t_dw AS d ON d.JGBM = y.DWBM
+    LEFT JOIN t_zp AS z ON z.SFZHM = y.SFZHM
+    <where>
+      <if test="param !=null and param !=''">
+      y.SFZHM = #{param,jdbcType=VARCHAR} or y.SJHM =#{param,jdbcType=VARCHAR}
+    </if>
+    </where>
+  </select>
+
+  <select id="queryUserPermission" resultType="com.lanswon.ssm.vo.OauthUrl" parameterType="string">
+    SELECT
+      y.SFZHM AS sfzhm,
+      q.QXBH as qxbh,
+      q.QXFF as qxff,
+      q.QXLJ as axlj,
+      q.FJQXBH as fjqxbh,
+      q.QXLX as qxlx
+    FROM
+        t_yh AS y
+    LEFT JOIN t_yh_js AS yj ON yj.YHBH = y.YHBH
+    LEFT JOIN t_js_qx AS jq ON jq.JSBH = yj.JSBH
+    LEFT JOIN t_qx AS q ON q.QXBH = jq.QXBH
+    <where>
+      <if test="idNo !=null and idNo !=''">
+       AND y.SFZHM = #{idNo}
+      </if>
+      <if test="permissionType !=null and permissionType !=''">
+        AND q.QXLX =#{permissionType}
+      </if>
+    </where>
+  </select>
+</mapper>

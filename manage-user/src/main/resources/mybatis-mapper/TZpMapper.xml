@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanswon.ssm.dao.TZpMapper">
+  <resultMap id="BaseResultMap" type="com.lanswon.ssm.domain.entity.TZp">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="SFZHM" jdbcType="VARCHAR" property="sfzhm" />
+    <result column="YSLJ" jdbcType="VARCHAR" property="yslj" />
+    <result column="LJ" jdbcType="VARCHAR" property="lj" />
+    <result column="ZPMC" jdbcType="VARCHAR" property="zpmc" />
+    <result column="ZP64M" jdbcType="LONGVARCHAR" property="zp64m" />
+  </resultMap>
+</mapper>

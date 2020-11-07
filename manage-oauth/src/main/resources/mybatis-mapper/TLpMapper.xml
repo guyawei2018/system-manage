@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanswon.authserver.dao.TLpMapper">
+  <resultMap id="BaseResultMap" type="com.lanswon.authserver.domain.entity.TLp">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="FWLP" jdbcType="VARCHAR" property="fwlp" />
+    <result column="SJHM" jdbcType="VARCHAR" property="sjhm" />
+    <result column="SQDZ" jdbcType="VARCHAR" property="sqdz" />
+    <result column="XFSJ" jdbcType="TIMESTAMP" property="xfsj" />
+  </resultMap>
+</mapper>

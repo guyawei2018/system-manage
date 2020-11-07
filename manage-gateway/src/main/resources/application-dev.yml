@@ -1,0 +1,24 @@
+spring:
+  boot:
+    admin:
+      client:
+        url: http://127.0.0.1:18002
+        instance:
+          prefer-ip: true
+          service-base-url: http://192.168.3.131:${server.port}
+          name: 巡特-网关服务
+  redis:
+    timeout: 5000
+    port: 13395
+    host: 61.160.81.178
+    database: 2
+  jedis:
+    pool:
+      max-active: 20
+      max-idle: 8
+      min-idle: 0
+      max-wait: 0
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 61.160.81.178:13393

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanswon.ssm.dao.TQxMapper">
+  <resultMap id="BaseResultMap" type="com.lanswon.ssm.domain.entity.TQx">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="QXBH" jdbcType="INTEGER" property="qxbh" />
+    <result column="QXMC" jdbcType="VARCHAR" property="qxmc" />
+    <result column="QXBS" jdbcType="VARCHAR" property="qxbs" />
+    <result column="QXLJ" jdbcType="VARCHAR" property="qxlj" />
+    <result column="QXFF" jdbcType="VARCHAR" property="qxff" />
+    <result column="FJQXBH" jdbcType="INTEGER" property="fjqxbh" />
+    <result column="PX" jdbcType="INTEGER" property="px" />
+    <result column="QXLX" jdbcType="INTEGER" property="qxlx" />
+  </resultMap>
+
+  <sql id="column_List">
+     Q.QXBH AS qxbh,
+     Q.QXMC AS qxmc,
+     Q.QXBS AS qxbs,
+     Q.QXLJ AS qxlj,
+     Q.QXFF AS qxff,
+     Q.FJQXBH AS fjqxbh,
+     Q.PX AS px,
+     Q.QXLX AS qxlx
+  </sql>
+
+  <select id="queryAllPermission" parameterType="com.lanswon.ssm.domain.dto.PermissionQueryDto" resultMap="BaseResultMap">
+    SELECT
+    <include refid="column_List"/>
+    FROM t_qx AS Q
+    <where>
+      <if test=" permissionName != null and permissionName !='' ">
+        AND Q.QXMC  Like CONCAT('%',#{permissionName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="permissionTypes != null">
+        AND Q.QXLX IN
+        <foreach collection="permissionTypes" index="index" item="type" open="(" separator="," close=")">
+          #{type}
+        </foreach>
+      </if>
+    </where>
+    <if test="isPagination == 1">
+      LIMIT #{startLine,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="count" parameterType="com.lanswon.ssm.domain.dto.PermissionQueryDto" resultType="int">
+    SELECT
+    count(*)
+    FROM t_qx AS Q
+    <where>
+      <if test=" permissionName != null and permissionName !='' ">
+        AND Q.QXMC Like CONCAT('%',#{permissionName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="permissionTypes != null">
+        AND Q.QXLX IN
+        <foreach collection="permissionTypes" index="index" item="type" open="(" separator="," close=")">
+          #{type}
+        </foreach>
+      </if>
+    </where>
+  </select>
+
+  <select id="queryPermissionToTree" resultType="com.lanswon.ssm.domain.vo.MenuTreeVo">
+    select
+       Q.QXBH AS qxbh,
+       Q.QXMC AS qxmc,
+       Q.QXLJ AS qxlj,
+       Q.FJQXBH AS fjqxbh
+     FROM t_qx AS Q
+  </select>
+</mapper>

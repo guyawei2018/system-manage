@@ -1,0 +1,24 @@
+spring:
+  boot:
+    admin:
+      client:
+        url: http://192.168.89.71:18002
+        instance:
+          prefer-ip: true
+          service-base-url: http://192.168.89.71:${server.port}
+          name: 巡特-网关服务
+  redis:
+    timeout: 5000
+    port: 6379
+    host: 192.168.89.70
+    database: 2
+  jedis:
+    pool:
+      max-active: 20
+      max-idle: 8
+      min-idle: 0
+      max-wait: 0
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.89.71:8848

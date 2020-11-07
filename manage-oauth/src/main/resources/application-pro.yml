@@ -1,0 +1,91 @@
+spring:
+  boot:
+    admin:
+      client:
+        url: http://50.64.102.34:18002
+        instance:
+          prefer-ip: true
+          service-base-url: http://50.64.102.38:${server.port}
+          name: 巡特-认证鉴权服务
+  # *****************************链路调用*****************************
+#  zipkin:
+#    base-url: http://192.168.44.78:9411
+#    sender:
+#      type: web
+#  sleuth:
+#    sampler:
+#      # 采样100%
+#      probability: 1.0
+  # ******************************数据源******************************
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://50.64.102.35:3306/swat_sys_manage?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false
+      username: root
+      password: Password1
+      max-active: 10
+      initial-size: 5
+      min-idle: 2
+      max-wait: 60000
+      pool-prepared-statements: true
+      web-stat-filter:
+        enabled: true
+        url-pattern: /druid
+  # ******************************redis******************************
+  redis:
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 8
+        min-idle: 0
+        max-wait: 0
+    port: 6379
+    host: 50.64.102.35
+    database: 2
+  # *****************************服务注册*****************************
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 50.64.102.34:8848
+        # 多网卡指定客户端IP
+        ip: 50.64.102.38
+    stream:
+      rocketmq:
+        binder:
+          name-server: 50.64.102.34:9876;50.64.102.38:9876
+        bindings:
+          output:
+            producer:
+              vipChannelEnabled: false
+      bindings:
+        output:
+          destination: topic-log
+    sentinel:
+      transport:
+        dashboard: 50.64.102.34:18003
+        heartbeat-interval-ms: 5000
+        client-ip: 50.64.102.38
+        port: 8721
+      log:
+        dir: /log/spring-alibaba/oauth/csp
+      eager: true
+# *****************************安全配置*****************************
+lanswon:
+  security:
+    code:
+      image:
+        length: 4
+        width: 60
+        height: 38
+    oauth2:
+      tokenStore: jwt
+      clients:
+        - clientId: lianzhi
+          clientSecret: 123456
+          accessTokenValiditySeconds: 86400
+          refTokenValiditySeconds: 86400 #86400 72小时
+        - clientId: lanswon
+          clientSecret: 123456
+          accessTokenValiditySeconds: 86400
+          refTokenValiditySeconds: 86400 #86400

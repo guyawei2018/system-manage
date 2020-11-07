@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanswon.ssm.dao.TJsQxMapper">
+  <resultMap id="BaseResultMap" type="com.lanswon.ssm.domain.entity.TJsQx">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="QXBH" jdbcType="INTEGER" property="qxbh" />
+    <result column="JSBH" jdbcType="INTEGER" property="jsbh" />
+  </resultMap>
+
+  <insert id="batchInsert">
+    insert into t_js_qx(QXBH,JSBH)
+    values
+    <foreach collection="list" item="jq" separator=",">
+      (#{jq.qxbh},#{jq.jsbh})
+    </foreach>
+  </insert>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lanswon.swat</groupId>
+    <artifactId>system-manage</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>manage-user</module>
+        <module>manage-oauth</module>
+        <module>manage-base</module>
+        <module>manage-gateway</module>
+        <module>manage-admin</module>
+    </modules>
+
+    <packaging>pom</packaging>
+    <name>lanswon-swat</name>
+    <description>
+        巡特警项目-系统管理模块(包含系统管理和认证管理)
+    </description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <lanswon.version>V-1.2</lanswon.version>
+    </properties>
+</project>

@@ -1,0 +1,25 @@
+spring:
+  boot:
+    admin:
+      client:
+        url: http://50.64.102.34:18002
+        instance:
+          prefer-ip: true
+          service-base-url: http://50.64.102.38:${server.port}
+          name: 巡特-网关服务
+  redis:
+    timeout: 5000
+    port: 6379
+    host: 50.64.102.35
+    database: 2
+  jedis:
+    pool:
+      max-active: 20
+      max-idle: 8
+      min-idle: 0
+      max-wait: 0
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 50.64.102.34:8848
+        ip: 50.64.102.38

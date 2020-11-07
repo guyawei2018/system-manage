@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanswon.authserver.dao.TYhxxMapper">
+  <resultMap id="BaseResultMap" type="com.lanswon.authserver.domain.entity.TYhxx">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="RYXH" jdbcType="INTEGER" property="ryxh" />
+    <result column="XM" jdbcType="VARCHAR" property="xm" />
+    <result column="RYZT" jdbcType="INTEGER" property="ryzt" />
+    <result column="SFZHM" jdbcType="VARCHAR" property="sfzhm" />
+    <result column="XB" jdbcType="INTEGER" property="xb" />
+    <result column="RYSFLX" jdbcType="INTEGER" property="rysflx" />
+    <result column="JH" jdbcType="VARCHAR" property="jh" />
+    <result column="YDSJCH" jdbcType="VARCHAR" property="ydsjch" />
+    <result column="YDSJDH" jdbcType="VARCHAR" property="ydsjdh" />
+    <result column="DXSJCH" jdbcType="VARCHAR" property="dxsjch" />
+    <result column="DXSJDH" jdbcType="VARCHAR" property="dxsjdh" />
+    <result column="QTSJH" jdbcType="VARCHAR" property="qtsjh" />
+    <result column="ZHGXSJ" jdbcType="TIMESTAMP" property="zhgxsj" />
+    <result column="JGXH" jdbcType="INTEGER" property="jgxh" />
+    <result column="JGBM" jdbcType="VARCHAR" property="jgbm" />
+    <result column="JGQC" jdbcType="VARCHAR" property="jgqc" />
+    <result column="BGDH" jdbcType="VARCHAR" property="bgdh" />
+    <result column="YHZPDZ" jdbcType="VARCHAR" property="yhzpdz" />
+    <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj" />
+    <result column="GXSJ" jdbcType="TIMESTAMP" property="gxsj" />
+  </resultMap>
+
+  <select id="selectOneByMobile" resultMap="BaseResultMap">
+    SELECT * FROM t_yhxx
+    <where>
+      <if test="mobile != null and mobile !='' ">
+        YDSJCH =#{mobile} or DXSJCH =#{mobile} or QTSJH = #{mobile}
+      </if>
+    </where>
+  </select>
+</mapper>
