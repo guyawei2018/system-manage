@@ -40,14 +40,22 @@ public class SysCompanyServiceimpl implements SysCompanyService {
 
     @Override
     public SimpleResponse queryAll(CompanyDto dto) {
-        Example example = new Example(TDw.class);
+        Example example = null;
+        if(dto.getIsPagination() ==1){
+            example = new Example(TDw.class);
+        }else{
+            example = new Example.Builder(TDw.class).select("jgbm").select("jgqc").build();
+        }
         Example.Criteria criteria = example.createCriteria();
+        //TODO 优化查询集合
         if(StringUtils.isNotEmpty(dto.getCompanyCode())){
             criteria.andLike("jgbm",dto.getCompanyCode());
         }
         if(StringUtils.isNotEmpty(dto.getCompanyName())){
             criteria.andLike("jgqc",dto.getCompanyName());
         }
+
+
         List<TDw> tDws = dwMapper.selectByExample(example);
         Page<TDw> page = new Page<>(dto.getPage(),dto.getLimit(),tDws.size(),dto.getIsPagination()==1,tDws);
         return SimpleResponse.ok(page);

@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 /**
  * @Description: 用户工作角色信息
  * @Author GU-YW
@@ -15,10 +19,21 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserWorkRoleVo extends TJs {
+public class UserRoleVo {
 
-   private String activeStatus;
+   /**
+    * 角色编号
+    */
+   private Integer jsbh;
 
-   private String yhbh;
+   /**
+    * 角色名称
+    */
+   private String jsmc;
+
+   /**
+    * 角色代码
+    */
+   private String jsdm;
 
 }

@@ -30,4 +30,10 @@ public interface TQxMapper extends Mapper<TQx> {
      */
     List<MenuTreeVo> queryPermissionToTree();
 
+    /**
+     * 查询所有一级菜单
+     * @return
+     */
+    List<MenuTreeVo> queryParentMenu();
+
 }

@@ -2,6 +2,7 @@ package com.lanswon.ssm.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lanswon.base.support.SimpleResponse;
+import com.lanswon.ssm.domain.dto.MenuDto;
 import com.lanswon.ssm.domain.dto.UserQueryDto;
 import com.lanswon.ssm.domain.dto.UserDto;
 import com.lanswon.ssm.domain.dto.UserRoleDto;
@@ -78,6 +79,13 @@ public interface SysUserService {
      * @return
      */
     SimpleResponse me(String param) throws UnsupportedEncodingException;
+
+    /**
+     * 保存菜单顺序
+     * @param dto
+     * @return
+     */
+    SimpleResponse saveMenuOrderByUser(MenuDto dto) throws ApplicationException;
 
 
 

@@ -76,15 +76,15 @@ public class CheckOauthFilter implements GlobalFilter, Ordered {
 
                //TODO 排除游客
                if(!o.getSjhm().equals("-1") ){
-                   OauthUser oauthUser = userService.getOauth(o.getSjhm());
-                   if(Objects.isNull(oauthUser)){
-                       //TODO 不存在用户权限
-                       message.put("code",HttpStatus.UNAUTHORIZED.value());
-                       message.put("msg","不存在用户权限,请重新登陆");
-                       byte[] bytes = message.toJSONString().getBytes(StandardCharsets.UTF_8);
-                       DataBuffer wrap = response.bufferFactory().wrap(bytes);
-                       return response.writeWith(Mono.just(wrap));
-                   }
+//                   OauthUser oauthUser = userService.getOauth(o.getSjhm());
+//                   if(Objects.isNull(oauthUser)){
+//                       //TODO 不存在用户权限
+//                       message.put("code",HttpStatus.UNAUTHORIZED.value());
+//                       message.put("msg","不存在用户权限,请重新登陆");
+//                       byte[] bytes = message.toJSONString().getBytes(StandardCharsets.UTF_8);
+//                       DataBuffer wrap = response.bufferFactory().wrap(bytes);
+//                       return response.writeWith(Mono.just(wrap));
+//                   }
 //                   String sqdz = oauthUser.getSqdz();
 //                   if(!sqdz.equals(id)){
 //                       message.put("code",HttpStatus.UNAUTHORIZED.value());

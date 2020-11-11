@@ -1,5 +1,6 @@
 package com.lanswon.ssm.dao;
 
+import com.lanswon.ssm.domain.vo.UserRoleVo;
 import com.lanswon.ssm.vo.OauthUrl;
 import com.lanswon.ssm.vo.UserInfo;
 import com.lanswon.ssm.domain.dto.UserQueryDto;
@@ -40,4 +41,11 @@ public interface TYhMapper extends Mapper<TYh> {
      * @return
      */
     List<OauthUrl> queryUserPermission(@Param("idNo")String idNo, @Param("permissionType") String permissionType);
+
+    /**
+     * 查询用户角色信息
+     * @param yhbh
+     * @return
+     */
+    List<UserRoleVo> queryUserRole(@Param("yhbh") Integer yhbh);
 }

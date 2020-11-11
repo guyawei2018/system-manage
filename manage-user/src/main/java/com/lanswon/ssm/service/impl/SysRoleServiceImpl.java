@@ -48,7 +48,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public SimpleResponse addSysRole(TJs role) throws ApplicationException {
-        Example example = new Example(TQx.class);
+        Example example = new Example(TJs.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.orEqualTo("jsmc",role.getJsmc());
         criteria.orEqualTo("jsdm",role.getJsdm());
@@ -62,14 +62,14 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public SimpleResponse updateSysRole(TJs role) throws ApplicationException {
-        Example example = new Example(TQx.class);
+        Example example = new Example(TJs.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.orEqualTo("jsmc",role.getJsmc());
         criteria.orEqualTo("jsdm",role.getJsdm());
         List<TJs> jsList = jsMapper.selectByExample(example);
         if(!CollectionUtils.isEmpty(jsList)){
             for(TJs js :jsList){
-                if(js.getJsbh() != role.getJsbh()){
+                if(js.getJsbh().intValue() != role.getJsbh().intValue()){
                     throw new ApplicationException(ErrorCode.SSM_SYS_ROLE_HAS_EXITS.code
                             ,ErrorCode.SSM_SYS_ROLE_HAS_EXITS.desc);
                 }
@@ -83,7 +83,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     public SimpleResponse queryAll(RoleQueryDto dto) {
         List<TJs> jsList = jsMapper.queryAllRoles(dto);
         int count = jsMapper.count(dto);
-        Page<TJs> page = new Page<>(dto.getPage(),dto.getLimit(),count,dto.getIsPagination() == 0,jsList);
+        Page<TJs> page = new Page<>(dto.getPage(),dto.getLimit(),count,false,jsList);
         return SimpleResponse.ok(page);
     }
 

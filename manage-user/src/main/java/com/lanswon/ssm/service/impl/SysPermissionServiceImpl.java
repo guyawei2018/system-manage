@@ -63,7 +63,7 @@ public class SysPermissionServiceImpl implements SysPermissionService {
     public SimpleResponse queryAll(PermissionQueryDto dto) {
         List<TQx> tQxes = qxMapper.queryAllPermission(dto);
         int count = qxMapper.count(dto);
-        Page<TQx> page = new Page<>(dto.getPage(),dto.getLimit(),count,dto.getIsPagination() == 0,tQxes);
+        Page<TQx> page = new Page<>(dto.getPage(),dto.getLimit(),count,false,tQxes);
         return SimpleResponse.ok(page);
     }
 

@@ -3,6 +3,7 @@ package com.lanswon.ssm.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.lanswon.base.support.JWTKey;
 import com.lanswon.base.support.SimpleResponse;
+import com.lanswon.ssm.domain.dto.MenuDto;
 import com.lanswon.ssm.domain.dto.UserDto;
 import com.lanswon.ssm.domain.dto.UserQueryDto;
 import com.lanswon.ssm.domain.dto.UserRoleDto;
@@ -72,7 +73,13 @@ public class UserController {
     @ApiOperation(value="查询当前用户")
     public SimpleResponse me(@RequestHeader(value = "token") String token) throws UnsupportedEncodingException {
         Claims claims = (Claims) Jwts.parser().setSigningKey(JWTKey.key.getBytes("UTF-8")).parseClaimsJws(token).getBody();
-        String userId = "user:" + claims.get("user_name");
+        String userId = (String) claims.get("user_name");
         return userService.me(userId);
+    }
+
+    @PostMapping("/menu/order")
+    @ApiOperation(value="新增用户菜单排序")
+    public SimpleResponse saveMenuOrderByUser(@RequestBody MenuDto dto) throws ApplicationException {
+        return userService.saveMenuOrderByUser(dto);
     }
 }

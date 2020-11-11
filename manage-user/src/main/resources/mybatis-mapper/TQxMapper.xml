@@ -71,4 +71,14 @@
        Q.FJQXBH AS fjqxbh
      FROM t_qx AS Q
   </select>
+
+  <select id="queryParentMenu" resultType="com.lanswon.ssm.domain.vo.MenuTreeVo">
+      select
+       Q.QXBH AS qxbh,
+       Q.QXMC AS qxmc,
+       Q.QXLJ AS qxlj,
+       Q.FJQXBH AS fjqxbh
+     FROM t_qx AS Q
+     where ISNULL(Q.FJQXBH)
+  </select>
 </mapper>

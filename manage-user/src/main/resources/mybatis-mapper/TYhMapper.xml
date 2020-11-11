@@ -149,7 +149,8 @@
       q.QXFF as qxff,
       q.QXLJ as axlj,
       q.FJQXBH as fjqxbh,
-      q.QXLX as qxlx
+      q.QXLX as qxlx,
+      q.QXMC AS qxmc
     FROM
         t_yh AS y
     LEFT JOIN t_yh_js AS yj ON yj.YHBH = y.YHBH
@@ -161,6 +162,21 @@
       </if>
       <if test="permissionType !=null and permissionType !=''">
         AND q.QXLX =#{permissionType}
+      </if>
+    </where>
+  </select>
+
+  <select id="queryUserRole" resultType="com.lanswon.ssm.domain.vo.UserRoleVo" parameterType="int">
+    SELECT
+      j.JSBH AS jsbh ,
+      j.JSMC AS jsmc ,
+      j.JSDM AS jsdm
+    FROM
+        t_yh_js AS yj
+    LEFT JOIN t_js AS j ON yj.JSBH = j.JSBH
+    <where>
+      <if test="yhbh != null">
+        yj.YHBH = #{yhbh}
       </if>
     </where>
   </select>

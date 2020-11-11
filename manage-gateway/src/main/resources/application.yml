@@ -50,10 +50,22 @@ spring:
           lower-case-service-id: true
           enabled: true
       routes:
+        - id: swat-xtj
+          uri: lb://swat-xtj
+          predicates:
+            - Path=/swat/**
+          filters:
+            - StripPrefix= 1
         - id: swat-sysmanage
           uri: lb://swat-sysmanage
           predicates:
             - Path=/system/**
+          filters:
+            - StripPrefix= 1
+        - id: module-open
+          uri: lb://module-open
+          predicates:
+            - Path=/open/**
           filters:
             - StripPrefix= 1
         - id: swat-oauthmanage

@@ -21,4 +21,6 @@ public class OauthUrl implements Serializable {
     private String qxlx;
 
     private String fjqxbh;
+
+    private String qxmc;
 }

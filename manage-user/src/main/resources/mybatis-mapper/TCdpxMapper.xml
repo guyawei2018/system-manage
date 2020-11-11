@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanswon.uum.dao.TCdpxMapper">
+  <resultMap id="BaseResultMap" type="com.lanswon.ssm.domain.entity.TCdpx">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="YHBH" jdbcType="INTEGER" property="yhbh" />
+    <result column="CDPX" jdbcType="VARCHAR" property="cdpx" />
+    <result column="GDCDPX" jdbcType="VARCHAR" property="gdcdpx" />
+    <result column="GXSJ" jdbcType="TIMESTAMP" property="gxsj" />
+    <result column="GXR" jdbcType="VARCHAR" property="gxr" />
+    <result column="CJSJ" jdbcType="TIMESTAMP" property="cjsj" />
+    <result column="CJR" jdbcType="VARCHAR" property="cjr" />
+  </resultMap>
+</mapper>
