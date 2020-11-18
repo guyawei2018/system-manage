@@ -11,6 +11,7 @@ spring:
     nacos:
       discovery:
         server-addr: 61.160.81.178:13393
+        namespace: 23140b3d-a82c-404b-9534-bb7d680c8fcd
     stream:
       rocketmq:
         binder:

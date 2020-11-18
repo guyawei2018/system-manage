@@ -65,17 +65,17 @@ public class CheckOauthFilter implements GlobalFilter, Ordered {
             String token = request.getHeaders().get("token").get(0);
 
            try {
-               UserInfo o = userService.getCurrentUser(token);
-               if(Objects.isNull(o)){
-                    message.put("code",HttpStatus.UNAUTHORIZED.value());
-                    message.put("msg","用户被重新审核授权,请重新登陆");
-                    byte[] bytes = message.toJSONString().getBytes(StandardCharsets.UTF_8);
-                    DataBuffer wrap = response.bufferFactory().wrap(bytes);
-                    return response.writeWith(Mono.just(wrap));
-                }
+//               UserInfo o = userService.getCurrentUser(token);
+//               if(Objects.isNull(o)){
+//                    message.put("code",HttpStatus.UNAUTHORIZED.value());
+//                    message.put("msg","用户被重新审核授权,请重新登陆");
+//                    byte[] bytes = message.toJSONString().getBytes(StandardCharsets.UTF_8);
+//                    DataBuffer wrap = response.bufferFactory().wrap(bytes);
+//                    return response.writeWith(Mono.just(wrap));
+//                }
 
                //TODO 排除游客
-               if(!o.getSjhm().equals("-1") ){
+//               if(!o.getSjhm().equals("-1") ){
 //                   OauthUser oauthUser = userService.getOauth(o.getSjhm());
 //                   if(Objects.isNull(oauthUser)){
 //                       //TODO 不存在用户权限
@@ -94,7 +94,7 @@ public class CheckOauthFilter implements GlobalFilter, Ordered {
 //                       return response.writeWith(Mono.just(wrap));
 //                   }
 
-               }
+//               }
            }catch (Exception ex){
                ex.printStackTrace();
                message.put("code",HttpStatus.UNAUTHORIZED.value());

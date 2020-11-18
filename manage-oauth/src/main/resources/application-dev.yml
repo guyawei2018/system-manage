@@ -50,7 +50,8 @@ spring:
         server-addr: 61.160.81.178:13393
         # 多网卡指定客户端IP
         #ip: 192.168.100.109
-#    stream:
+        namespace: 23140b3d-a82c-404b-9534-bb7d680c8fcd
+    #    stream:
 #      rocketmq:
 #        binder:
 #          name-server: 50.65.81.59:9876

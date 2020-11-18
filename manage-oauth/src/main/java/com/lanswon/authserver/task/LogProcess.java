@@ -52,7 +52,7 @@ public class LogProcess implements Runnable {
     private void executeTask(){
         LogDto poll = MessageQueue.LOGQUEUE.poll();
         log.debug(poll.toString());
-        rocketMQTemplate.convertAndSend("topic-log",poll);
+//        rocketMQTemplate.convertAndSend("topic-log",poll);
         log.debug("发送信息成功");
     }
 

@@ -57,8 +57,8 @@ public class LogProcess implements Runnable {
     private void executeTask(){
         LogDto poll = UumContant.LOGQUEUE.poll();
         log.debug(poll.toString());
-        this.source.output()
-                .send(MessageBuilder.withPayload(poll).build());
+//        this.source.output()
+//                .send(MessageBuilder.withPayload(poll).build());
         log.debug("发送信息成功");
     }
 
