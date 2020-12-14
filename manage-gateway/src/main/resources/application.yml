@@ -50,6 +50,12 @@ spring:
           lower-case-service-id: true
           enabled: true
       routes:
+        - id: server-tpq
+          uri: lb://server-tpq
+          predicates:
+            - Path=/castscreen/**
+          filters:
+            - StripPrefix= 1
         - id: swat-xtj
           uri: lb://swat-xtj
           predicates:
